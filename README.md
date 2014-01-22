@@ -10,6 +10,8 @@ pond
 
 Collect a stream into a buffer.
 
+Please aware that, because buffers came out from a stream are buffered into the memory, **DO NOT try to collect a stream that is large or with unknowable length!**
+
 
 ## Installation
 
@@ -25,7 +27,7 @@ $ npm install pond
 ```js
 fs.createReadStream('somefile')
   .pipe(pond())
-  .success(function (buffer) {
+  .spoon(function (buffer) {
     // ...
   })
 ```
