@@ -10,15 +10,15 @@
       "data-cover-flags": {
         "debug": false
       }
-    },
+    }
+  },
+  "config": {
     "travis-cov": {
       "threshold": 90
     }
   },
-  "dependencies": {
-    "debug": "*"
-  },
   "devDependencies": {
+    "debug": "*",
     "mocha": "*",
     "mocha-lcov-reporter": "*",
     "should": "*",

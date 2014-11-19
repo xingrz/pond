@@ -1,12 +1,7 @@
 pond
 ====
 
-[![Build Status](https://travis-ci.org/xingrz/pond.png?branch=master)](https://travis-ci.org/xingrz/pond)
-[![Coverage Status](https://coveralls.io/repos/xingrz/pond/badge.png)](https://coveralls.io/r/xingrz/pond)
-[![Dependency Status](https://david-dm.org/xingrz/pond.png)](https://david-dm.org/xingrz/pond)
-[![NPM version](https://badge.fury.io/js/pond.png)](http://badge.fury.io/js/pond)
-
-[![NPM](https://nodei.co/npm/pond.png?downloads=true&stars=true)](https://nodei.co/npm/pond)
+[![][travis-img]][travis-url] [![][coveralls-img]][coveralls-url] [![][npm-version]][npm-url] [![][npm-downloads]][npm-url] [![][license-img]][license-url] [![][issues-img]][issues-url]
 
 Collect a stream into a buffer.
 
@@ -48,11 +43,19 @@ $ npm test
 ```
 
 
-## Roadmap
-
-- Promise support
-
-
 ## License
 
 This project is released under the terms of [MIT License](LICENSE).
+
+
+[travis-img]: https://img.shields.io/travis/xingrz/pond.svg?style=flat-square
+[travis-url]: https://travis-ci.org/xingrz/pond
+[coveralls-img]: https://img.shields.io/coveralls/xingrz/pond.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/xingrz/pond
+[npm-version]: https://img.shields.io/npm/v/pond.svg?style=flat-square
+[npm-downloads]: https://img.shields.io/npm/dm/pond.svg?style=flat-square
+[npm-url]: https://www.npmjs.org/package/pond
+[license-img]: https://img.shields.io/npm/l/pond.svg?style=flat-square
+[license-url]: LICENSE
+[issues-img]:	https://img.shields.io/github/issues/xingrz/pond.svg?style=flat-square
+[issues-url]: https://github.com/xingrz/pond/issues
