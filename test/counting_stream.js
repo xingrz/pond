@@ -21,6 +21,6 @@ CountingStream.prototype._read = function () {
   var self = this
 
   process.nextTick(function () {
-    self.push(self.chunks.shift())
+    self.push(self.chunks.shift() || null)
   })
 }
