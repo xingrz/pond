@@ -1,6 +1,6 @@
 {
   "name": "pond",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Collect a stream into a buffer.",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,10 @@
       "threshold": 90
     }
   },
+  "dependencies": {
+    "debug": "*"
+  },
   "devDependencies": {
-    "debug": "*",
     "mocha": "*",
     "mocha-lcov-reporter": "*",
     "should": "*",
