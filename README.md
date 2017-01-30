@@ -8,10 +8,15 @@ Collect a stream into a buffer.
 Please aware that, because buffers came out from a stream are buffered into the memory, **DO NOT try to collect a stream that is large or with unknowable length!**
 
 
+## Requirements
+
+Node >= 0.10, also tested on 0.12, 4, 5, 6.
+
+
 ## Installation
 
-```
-$ npm install pond
+```sh
+npm install pond
 ```
 
 
@@ -35,11 +40,21 @@ pond(fs.createReadStream('anotherfile'), function (err, buffer) {
 })
 ```
 
+### Promise, await
+
+```js
+let buffer = await stream.pipe(pond()).spoon()
+```
+
+```js
+let buffer = await pond(stream).spoon()
+```
+
 
 ## Test
 
-```
-$ npm test
+```sh
+npm test
 ```
 
 
