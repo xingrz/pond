@@ -1,6 +1,6 @@
 {
   "name": "pond",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Collect a stream into a buffer.",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,7 @@
     }
   },
   "dependencies": {
+    "bluebird": "^3.4.7",
     "debug": "*"
   },
   "devDependencies": {
@@ -37,9 +38,12 @@
   "bugs": {
     "url": "https://github.com/xingrz/pond/issues"
   },
-  "keywords": [ "stream", "buffer" ],
+  "keywords": [
+    "stream",
+    "buffer"
+  ],
   "engines": {
-    "node":">= 0.10.0"
+    "node": ">= 0.10.0"
   },
   "author": "XiNGRZ <chenxingyu92@gmail.com>",
   "license": "MIT"
