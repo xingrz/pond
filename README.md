@@ -16,38 +16,41 @@ Node >= 4, tested on latest Node and latest LTS Node.
 ## Installation
 
 ```sh
-npm install pond
+npm install --save pond
 ```
 
 
 ## Usage
 
-### Piping:
+### Promise, await
+
+```js
+const buffer = await stream.pipe(pond()).spoon();
+```
+
+```js
+const buffer = await pond(stream).spoon();
+```
+
+### Stream API (piping):
 
 ```js
 fs.createReadStream('somefile')
   .pipe(pond())
-  .spoon(function (buffer) {
+  .on('error', (err) => {
     // ...
   })
+  .spoon((buffer) => {
+    // ...
+  });
 ```
 
-### Or:
+### Or, old-fashioned callback:
 
 ```js
 pond(fs.createReadStream('anotherfile'), function (err, buffer) {
   // ...
-})
-```
-
-### Promise, await
-
-```js
-let buffer = await stream.pipe(pond()).spoon()
-```
-
-```js
-let buffer = await pond(stream).spoon()
+});
 ```
 
 
