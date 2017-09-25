@@ -7,6 +7,19 @@ Collect a stream into a buffer.
 
 Please aware that, because buffers came out from a stream are buffered into the memory, **DO NOT try to collect a stream that is large or with unknowable length!**
 
+```js
+import { createReadStream } from 'fs';
+import { createHash } from 'crypto';
+import pond from 'pond';
+
+const digest = await createReadStream('/path/to/some/file')
+  .pipe(createHash('sha256'))
+  .pipe(pond())
+  .spoon();
+
+console.log(digest.toString('hex'));
+```
+
 
 ## Requirements
 
