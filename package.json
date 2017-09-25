@@ -4,38 +4,26 @@
   "description": "Collect a stream into a buffer.",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/babel es -d lib",
+    "build": "babel es -d lib",
     "clean": "rm -rf lib",
     "prepublish": "npm run build",
     "pretest": "npm run build",
-    "test": "make test-all",
-    "blanket": {
-      "pattern": "//^((?!(node_modules|test)).)*$/",
-      "data-cover-flags": {
-        "debug": false
-      }
-    }
-  },
-  "config": {
-    "travis-cov": {
-      "threshold": 90
-    }
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha",
+    "test:ci": "NODE_ENV=test nyc --reporter=text mocha --reporter=tap",
+    "coverage": "NODE_ENV=test nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "debug": "*"
+    "debug": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-0": "^6.24.1",
-    "blanket": "1.1.5",
-    "contributors": "*",
-    "coveralls": "*",
-    "mocha": "*",
-    "mocha-lcov-reporter": "*",
-    "should": "*",
-    "travis-cov": "*"
+    "coveralls": "^2.13.1",
+    "mocha": "^3.5.3",
+    "nyc": "^11.2.1",
+    "should": "^13.1.0"
   },
   "homepage": "https://github.com/xingrz/pond",
   "repository": {

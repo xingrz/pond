@@ -3,7 +3,8 @@
 
 node_modules
 
-coverage.html
+.nyc_output
+coverage
 
 test/
 
