@@ -63,9 +63,9 @@ npm test
 This project is released under the terms of [MIT License](LICENSE).
 
 
-[travis-img]: https://img.shields.io/travis/xingrz/pond.svg?style=flat-square
+[travis-img]: https://img.shields.io/travis/xingrz/pond/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/xingrz/pond
-[coveralls-img]: https://img.shields.io/coveralls/xingrz/pond.svg?style=flat-square
+[coveralls-img]: https://img.shields.io/coveralls/xingrz/pond/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/xingrz/pond
 [npm-version]: https://img.shields.io/npm/v/pond.svg?style=flat-square
 [npm-downloads]: https://img.shields.io/npm/dm/pond.svg?style=flat-square
