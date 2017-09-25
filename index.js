@@ -1,1 +1,1 @@
-module.exports = require('./lib/pond')
+module.exports = require('./lib/pond');

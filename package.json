@@ -4,6 +4,10 @@
   "description": "Collect a stream into a buffer.",
   "main": "index.js",
   "scripts": {
+    "build": "./node_modules/.bin/babel es -d lib",
+    "clean": "rm -rf lib",
+    "prepublish": "npm run build",
+    "pretest": "npm run build",
     "test": "make test-all",
     "blanket": {
       "pattern": "//^((?!(node_modules|test)).)*$/",
@@ -22,13 +26,17 @@
     "debug": "*"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "blanket": "1.1.5",
+    "contributors": "*",
+    "coveralls": "*",
     "mocha": "*",
     "mocha-lcov-reporter": "*",
     "should": "*",
-    "blanket": "1.1.5",
-    "coveralls": "*",
-    "travis-cov": "*",
-    "contributors": "*"
+    "travis-cov": "*"
   },
   "homepage": "https://github.com/xingrz/pond",
   "repository": {
