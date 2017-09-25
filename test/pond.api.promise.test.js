@@ -1,5 +1,3 @@
-var Promise = require('bluebird')
-
 var pond = require('../')
   , CountingStream = require('./counting_stream')
 

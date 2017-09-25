@@ -1,101 +1,95 @@
-var debug = require('debug')('pond')
+import { Writable, Readable } from 'stream';
 
-var Promise = require('bluebird')
+const debug = require('debug')('pond');
 
-var Writable = require('stream').Writable
-  , Readable = require('stream').Readable
-  , inherits = require('util').inherits
-
-module.exports = Pond
-inherits(Pond, Writable)
-
-function Pond (source, callback, options) {
-  if (!(this instanceof Pond)) {
-    return new Pond(source, callback, options)
-  }
-
-  if (!(source instanceof Readable)) {
-    options = callback
-    callback = source
-    source = null
-    debug('skipped argument `source`')
-  }
-
-  if ('function' !== typeof callback) {
-    options = callback
-    callback = null
-    debug('skipped argument `callback`')
-  }
-
-  Writable.call(this, options)
-
-  var self = this
-
-  self._buffers = []
-
-  self._usePromise = false
-
-  self._promise = new Promise(function (resolve, reject) {
-
-    self.once('finish', function () {
-      var buffer = Buffer.concat(self._buffers)
-      debug('finished collecting %s bytes', buffer.length)
-
-      if ('function' === typeof self._callback) {
-        self._callback(null, buffer)
-        debug('triggered callback without error')
-      }
-
-      if ('function' === typeof self._onspooned) {
-        self._onspooned(buffer)
-        debug('spooned')
-      }
-
-      if (self._usePromise) {
-        resolve(buffer)
-        debug('resolved')
-      }
-    })
-
-    self.once('error', function (err) {
-      if ('function' === typeof self._callback) {
-        self._callback(err)
-        debug('callback error emited by self')
-      }
-
-      if (self._usePromise) {
-        reject(err)
-        debug('rejected')
-      }
-    })
-
-  })
-
-  if (callback) {
-    self._callback = callback
-  }
-
-  debug('setup finished')
-
-  if (source) {
-    source.pipe(self)
-    debug('piped source')
-  }
+export default function pond(source, callback, options) {
+  return new Pond(source, callback, options);
 }
 
-Pond.prototype._write = function (chunk, encoding, done) {
-  this._buffers.push(chunk)
-  debug('buffered chunk %s bytes', chunk.length)
-  done()
-}
+export class Pond extends Writable {
 
-Pond.prototype.spoon = function (handler) {
-  if ('function' === typeof handler) {
-    this._onspooned = handler
-    debug('attached spoon handler')
-  } else {
-    this._usePromise = true
-    debug('spoon as a Promise')
-    return this._promise
+  _buffers = [];
+  _usePromise = false;
+
+  constructor(source, callback, options) {
+    if (!(source instanceof Readable)) {
+      options = callback;
+      callback = source;
+      source = null;
+      debug('skipped argument `source`');
+    }
+
+    if ('function' !== typeof callback) {
+      options = callback;
+      callback = null;
+      debug('skipped argument `callback`');
+    }
+
+    super(options);
+
+    this._promise = new Promise((resolve, reject) => {
+
+      this.once('finish', () => {
+        const buffer = Buffer.concat(this._buffers);
+        debug('finished collecting %s bytes', buffer.length);
+
+        if ('function' === typeof this._callback) {
+          this._callback(null, buffer);
+          debug('triggered callback without error');
+        }
+
+        if ('function' === typeof this._onspooned) {
+          this._onspooned(buffer);
+          debug('spooned');
+        }
+
+        if (this._usePromise) {
+          resolve(buffer);
+          debug('resolved');
+        }
+      });
+
+      this.once('error', (err) => {
+        if ('function' === typeof this._callback) {
+          this._callback(err);
+          debug('callback error emited by self');
+        }
+
+        if (this._usePromise) {
+          reject(err);
+          debug('rejected');
+        }
+      });
+
+    });
+
+    if (callback) {
+      this._callback = callback;
+    }
+
+    debug('setup finished');
+
+    if (source) {
+      source.pipe(this);
+      debug('piped source');
+    }
   }
+
+  _write(chunk, encoding, done) {
+    this._buffers.push(chunk);
+    debug('buffered chunk %s bytes', chunk.length);
+    done();
+  }
+
+  spoon(handler) {
+    if ('function' === typeof handler) {
+      this._onspooned = handler;
+      debug('attached spoon handler');
+    } else {
+      this._usePromise = true;
+      debug('spoon as a Promise');
+      return this._promise;
+    }
+  }
+
 }

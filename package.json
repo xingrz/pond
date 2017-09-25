@@ -22,7 +22,6 @@
     }
   },
   "dependencies": {
-    "bluebird": "^3.4.7",
     "debug": "*"
   },
   "devDependencies": {
