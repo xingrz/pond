@@ -10,7 +10,7 @@ Please aware that, because buffers came out from a stream are buffered into the 
 
 ## Requirements
 
-Node >= 0.12, also tested on Node 4 ~ Node 8.
+Node >= 4, tested on latest Node and latest LTS Node.
 
 
 ## Installation
