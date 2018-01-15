@@ -29,7 +29,11 @@ export class Pond extends Writable {
 
     this._promise = new Promise((resolve, reject) => {
 
-      this.once('finish', () => {
+      let hasError = false;
+
+      this.once('finish', () => postponeForError(() => {
+        if (hasError) return;
+
         const buffer = Buffer.concat(this._buffers);
         debug('finished collecting %s bytes', buffer.length);
 
@@ -47,7 +51,7 @@ export class Pond extends Writable {
           resolve(buffer);
           debug('resolved');
         }
-      });
+      }));
 
       this.once('error', (err) => {
         if ('function' === typeof this._callback) {
@@ -62,7 +66,10 @@ export class Pond extends Writable {
       });
 
       this.on('pipe', (source) => {
-        source.once('error', e => this.destroy(e));
+        source.once('error', (e) => {
+          hasError = true;
+          this.destroy(e);
+        });
       });
 
     });
@@ -96,4 +103,8 @@ export class Pond extends Writable {
     }
   }
 
+}
+
+function postponeForError(callback) {
+  process.nextTick(() => process.nextTick(callback));
 }

@@ -1,6 +1,6 @@
 {
   "name": "pond",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Collect a stream into a buffer.",
   "main": "index.js",
   "scripts": {
