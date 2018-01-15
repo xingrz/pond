@@ -61,6 +61,10 @@ export class Pond extends Writable {
         }
       });
 
+      this.on('pipe', (source) => {
+        source.once('error', e => this.destroy(e));
+      });
+
     });
 
     if (callback) {
