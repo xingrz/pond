@@ -2,7 +2,10 @@ import { Readable } from 'stream';
 
 export default class CountingStream extends Readable {
 
-  constructor(count) {
+  chunks: Buffer[];
+  whole: Buffer;
+
+  constructor(count: number) {
     super();
     this.chunks = [];
     for (var i = 0; i < count; i++) {
@@ -12,7 +15,7 @@ export default class CountingStream extends Readable {
     this.whole = Buffer.concat(this.chunks);
   }
 
-  _read() {
+  _read(): void {
     process.nextTick(() => {
       this.push(this.chunks.shift() || null);
     });

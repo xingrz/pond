@@ -1,7 +1,7 @@
-pond
+pond [![CI](https://github.com/xingrz/pond/actions/workflows/ci.yml/badge.svg)](https://github.com/xingrz/pond/actions/workflows/ci.yml)
 ====
 
-[![][travis-img]][travis-url] [![][coveralls-img]][coveralls-url] [![][npm-version]][npm-url] [![][npm-downloads]][npm-url] [![][license-img]][license-url] [![][issues-img]][issues-url]
+[![][coveralls-img]][coveralls-url] [![][npm-version]][npm-url] [![][npm-downloads]][npm-url] [![][license-img]][license-url] [![][issues-img]][issues-url] [![commits][commits-img]][commits-url]
 
 Collect a stream into a buffer.
 
@@ -23,7 +23,7 @@ console.log(digest.toString('hex'));
 
 ## Requirements
 
-Node >= 4, tested on latest Node and latest LTS Node.
+Node >= 10, tested on latest Node and latest LTS Node.
 
 
 ## Installation
@@ -79,8 +79,6 @@ npm test
 This project is released under the terms of [MIT License](LICENSE).
 
 
-[travis-img]: https://img.shields.io/travis/xingrz/pond/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/xingrz/pond
 [coveralls-img]: https://img.shields.io/coveralls/xingrz/pond/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/xingrz/pond
 [npm-version]: https://img.shields.io/npm/v/pond.svg?style=flat-square
@@ -90,3 +88,5 @@ This project is released under the terms of [MIT License](LICENSE).
 [license-url]: LICENSE
 [issues-img]:	https://img.shields.io/github/issues/xingrz/pond.svg?style=flat-square
 [issues-url]: https://github.com/xingrz/pond/issues
+[commits-img]: https://img.shields.io/github/last-commit/xingrz/pond?style=flat-square
+[commits-url]: https://github.com/xingrz/pond/commits/master

@@ -1,30 +1,23 @@
-import { Writable, Readable } from 'stream';
+import { Writable, Readable, WritableOptions } from 'stream';
 
 const debug = require('debug')('pond');
 
-export default function pond(source, callback, options) {
+type ICallback = (err?: Error | null, buffer?: Buffer) => void;
+
+export default function pond(source: Readable | null = null, callback: ICallback | null = null, options?: WritableOptions) {
   return new Pond(source, callback, options);
 }
 
-export class Pond extends Writable {
+class Pond extends Writable {
 
-  _buffers = [];
-  _usePromise = false;
+  private _buffers: Buffer[] = [];
+  private _usePromise = false;
+  private _promise: Promise<Buffer>;
 
-  constructor(source, callback, options) {
-    if (!(source instanceof Readable)) {
-      options = callback;
-      callback = source;
-      source = null;
-      debug('skipped argument `source`');
-    }
+  private _callback?: ICallback;
+  private _onspooned?: (buffer: Buffer) => void;
 
-    if ('function' !== typeof callback) {
-      options = callback;
-      callback = null;
-      debug('skipped argument `callback`');
-    }
-
+  constructor(source: Readable | null, callback: ICallback | null, options?: WritableOptions) {
     super(options);
 
     this._promise = new Promise((resolve, reject) => {
@@ -86,13 +79,13 @@ export class Pond extends Writable {
     }
   }
 
-  _write(chunk, encoding, done) {
+  _write(chunk: Buffer, encoding: string, callback: (error?: Error | null) => void): void {
     this._buffers.push(chunk);
     debug('buffered chunk %s bytes', chunk.length);
-    done();
+    callback();
   }
 
-  spoon(handler) {
+  spoon(handler?: (buffer: Buffer) => void) {
     if ('function' === typeof handler) {
       this._onspooned = handler;
       debug('attached spoon handler');
@@ -105,6 +98,6 @@ export class Pond extends Writable {
 
 }
 
-function postponeForError(callback) {
+function postponeForError(callback: () => void) {
   process.nextTick(() => process.nextTick(callback));
 }
