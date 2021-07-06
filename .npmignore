@@ -6,4 +6,10 @@
 coverage
 node_modules
 
+src
 test
+
+.github
+
+jest.config.js
+tsconfig.json
