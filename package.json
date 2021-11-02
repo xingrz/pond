@@ -1,6 +1,6 @@
 {
   "name": "pond",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Collect a stream into a buffer.",
   "main": "./lib/pond.js",
   "types": "./lib/pond.d.ts",
