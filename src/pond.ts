@@ -85,7 +85,9 @@ class Pond extends Writable {
     callback();
   }
 
-  spoon(handler?: (buffer: Buffer) => void) {
+  spoon(): Promise<Buffer>;
+  spoon(handler: (buffer: Buffer) => void): void;
+  spoon(handler?: (buffer: Buffer) => void): Promise<Buffer> | void {
     if ('function' === typeof handler) {
       this._onspooned = handler;
       debug('attached spoon handler');
